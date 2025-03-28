@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pricing Boxes</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .heading {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6699;
+            margin-bottom: 10px;
+        }
+        .box {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            text-align: left;
+        }
+        .box.selected {
+            border-color: #ff6699;
+            background: #fff5f8;
+        }
+        .discount {
+            background: #ff6699;
+            color: white;
+            font-size: 12px;
+            padding: 3px 5px;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        .most-popular {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff6699;
+            color: white;
+            font-size: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 12px;
+        }
+        .options {
+            display: none;
+            margin-top: 10px;
+        }
+        .box.selected .options {
+            display: block;
+        }
+        .select {
+            padding: 5px;
+            margin: 5px;
+        }
+        .cart-button {
+            background: #ff6699;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">YAY! It's BOGO</div>
+        
+        <div class="box" onclick="selectBox(this, 10, 1)">
+            <input type="radio" name="unit" />
+            <strong>1 Unit</strong> <span class="discount">10% Off</span>
+            <br>
+            <span class="price">$10.00 USD</span>
+            <span class="old-price">$24.00 USD</span>
+            <div class="options">
+                <label>#1 Size: <select class="select"><option>S</option><option>M</option></select></label>
+                <label>Color: <select class="select"><option>Black</option><option>Red</option></select></label>
+            </div>
+        </div>
+        
+        <div class="box" onclick="selectBox(this, 18, 2)">
+            <div class="most-popular">MOST POPULAR</div>
+            <input type="radio" name="unit" />
+            <strong>2 Units</strong> <span class="discount">20% Off</span>
+            <br>
+            <span class="price">$18.00 USD</span>
+            <span class="old-price">$24.00 USD</span>
+            <div class="options">
+                <label>#1 Size: <select class="select"><option>S</option><option>M</option></select></label>
+                <label>Color: <select class="select"><option>Black</option><option>Red</option></select></label>
+                <br>
+                <label>#2 Size: <select class="select"><option>S</option><option>M</option></select></label>
+                <label>Color: <select class="select"><option>Black</option><option>Red</option></select></label>
+            </div>
+        </div>
+        
+        <div class="box" onclick="selectBox(this, 24, 3)">
+            <input type="radio" name="unit" />
+            <strong>3 Units</strong> <span class="discount">30% Off</span>
+            <br>
+            <span class="price">$24.00 USD</span>
+            <span class="old-price">$24.00 USD</span>
+            <div class="options">
+                <label>#1 Size: <select class="select"><option>S</option><option>M</option></select></label>
+                <label>Color: <select class="select"><option>Black</option><option>Red</option></select></label>
+                <br>
+                <label>#2 Size: <select class="select"><option>S</option><option>M</option></select></label>
+                <label>Color: <select class="select"><option>Black</option><option>Red</option></select></label>
+                <br>
+                <label>#3 Size: <select class="select"><option>S</option><option>M</option></select></label>
+                <label>Color: <select class="select"><option>Black</option><option>Red</option></select></label>
+            </div>
+        </div>
+        
+        <div style="color: #ff6699; margin-top: 10px;">Free Delivery</div>
+        <div>Total: <span id="total-price">$0.00</span> USD</div>
+        
+        <button class="cart-button">+ Add to Cart</button>
+    </div>
+
+    <script>
+        function selectBox(element, price, units) {
+            document.querySelectorAll('.box').forEach(box => box.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('total-price').innerText = `$${price.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
